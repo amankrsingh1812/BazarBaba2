@@ -70,6 +70,7 @@ public class Main2Activity extends AppCompatActivity implements Product_Adapter.
                     Intent intent=new Intent(Main2Activity.this,cart.class);
 //                    Bundle bundle=new Bundle();
 //                    bundle.putParcelableArray();
+                    intent.putExtra("uid",uid);
                     intent.putParcelableArrayListExtra("List",(ArrayList< ? extends  Parcelable >)cartList);
 //                intent.putExtra("uemail",uemail);
 
@@ -102,6 +103,7 @@ public class Main2Activity extends AppCompatActivity implements Product_Adapter.
 
         search_et =findViewById(R.id.search_et);
         itemList=new ArrayList<>();
+//        uid=getIntent().getStringExtra("uid");
         progressDialog=new ProgressDialog(this);
         uid=getIntent().getStringExtra("uid");
         cartList=new ArrayList<>();
@@ -220,7 +222,7 @@ public class Main2Activity extends AppCompatActivity implements Product_Adapter.
 ////
     @Override
     public void onAdd(Product_details it) {
-        Toast.makeText(getApplicationContext(),"Hello", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Added 1 pc Successfully", Toast.LENGTH_SHORT).show();
         cartList.add(it);
     }
     @Override
