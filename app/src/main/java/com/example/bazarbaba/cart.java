@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,6 +31,7 @@ public class cart extends AppCompatActivity implements Cart_adapter.MyClickListe
     private Product_Adapter adapter;
     private Cart_adapter adapter2;
     private EditText search_et;
+    private TextView pri,dpri;
     private String uid;
     private ProgressDialog progressDialog;
     private Button buttonm2;
@@ -77,16 +79,27 @@ public class cart extends AppCompatActivity implements Cart_adapter.MyClickListe
 
         Intent intent=getIntent();
         cartList=intent.getParcelableArrayListExtra("List");
+;
         setUpRecyclerViewcart();
     }
     @Override
     public void ondd(Product_details it) {
-        Toast.makeText(getApplicationContext(),"Hello", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Removed", Toast.LENGTH_SHORT).show();
         cartList.remove(it);
         setUpRecyclerViewcart();
     }
     private void setUpRecyclerViewcart(){
 
+        long s=0,ds=0;
+        for(Product_details item:cartList)
+        {
+            s+=item.getPrice();
+        }
+        ds=s;
+        pri=findViewById(R.id.price_editable);
+        dpri=findViewById(R.id.delivery_charge_editable);
+        pri.setText(Long.toString(s));
+        dpri.setText(Long.toString(ds));
         RecyclerView recyclerView = findViewById(R.id.recycler_viewcart);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
